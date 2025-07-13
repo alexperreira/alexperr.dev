@@ -1,8 +1,19 @@
 <script lang="ts">
+	let {
+		openAbout,
+		showAbout,
+		goHome
+	}: {
+		openAbout: () => void;
+		showAbout: boolean;
+		goHome: () => void;
+	} = $props();
 </script>
 
-<div class="container">
-	<h1>alex<br />perr<br />.Dev</h1>
+<nav class="container" class:top-left={showAbout}>
+	<button class="home-title" onclick={goHome} aria-label="home">
+		<h1>alex<br />perr<br />.Dev</h1>
+	</button>
 
 	<div class="menu-container">
 		<div class="column column1">
@@ -26,19 +37,33 @@
 			</div>
 		</div>
 		<div class="column column3">
-			<div class="row"><p>About</p></div>
+			<div class="row">
+				<p>
+					<button onclick={openAbout} role="dialog" aria-label="About Section">About</button>
+				</p>
+			</div>
 			<div class="row"><p>Journal</p></div>
 		</div>
 	</div>
-</div>
+</nav>
 
 <style>
-	.container {
+	nav {
 		position: absolute;
 		bottom: 0;
 		left: 0;
 		margin: 20px 60px;
 		text-align: left;
+		transform: translateY(0);
+		transition: all 0.5s ease-in-out;
+		cursor: pointer;
+	}
+
+	nav.top-left {
+		top: 80vh;
+		bottom: auto;
+		transform: translateY(-80vh);
+		z-index: 5;
 	}
 	h1 {
 		font-family: 'Druk Wide Web Bold Regular';
@@ -78,6 +103,18 @@
 	.row {
 		margin: 5px;
 		height: 20px;
+	}
+
+	button {
+		border: none;
+		background: none;
+		color: #ffffff;
+		font-family: 'Hanken Grotesk', sans-serif;
+		font-size: 16px;
+		font-weight: 500;
+		font-style: normal;
+		padding-left: 0;
+		cursor: pointer;
 	}
 
 	.row p {
